@@ -1,0 +1,109 @@
+{
+  "apiName": "Todo__c",
+  "childRelationships": {},
+  "fields": {
+    "Completed__c": {
+      "displayValue": null,
+      "value": false
+    },
+    "CreatedBy": {
+      "displayValue": "User User",
+      "value": {
+        "apiName": "User",
+        "childRelationships": {},
+        "fields": {
+          "Id": {
+            "displayValue": null,
+            "value": "005K0000005VLEfIAO"
+          },
+          "Name": {
+            "displayValue": null,
+            "value": "User User"
+          }
+        },
+        "id": "005K0000005VLEfIAO",
+        "lastModifiedById": "005K0000005VLEfIAO",
+        "lastModifiedDate": "2019-02-04T20:34:22.000Z",
+        "recordTypeInfo": null,
+        "systemModstamp": "2019-02-04T20:34:22.000Z"
+      }
+    },
+    "CreatedById": {
+      "displayValue": null,
+      "value": "005K0000005VLEfIAO"
+    },
+    "CreatedDate": {
+      "displayValue": "07/02/2019 4:44 PM",
+      "value": "2019-02-07T21:44:38.000Z"
+    },
+    "LastModifiedBy": {
+      "displayValue": "User User",
+      "value": {
+        "apiName": "User",
+        "childRelationships": {},
+        "fields": {
+          "Id": {
+            "displayValue": null,
+            "value": "005K0000005VLEfIAO"
+          },
+          "Name": {
+            "displayValue": null,
+            "value": "User User"
+          }
+        },
+        "id": "005K0000005VLEfIAO",
+        "lastModifiedById": "005K0000005VLEfIAO",
+        "lastModifiedDate": "2019-02-04T20:34:22.000Z",
+        "recordTypeInfo": null,
+        "systemModstamp": "2019-02-04T20:34:22.000Z"
+      }
+    },
+    "LastModifiedById": {
+      "displayValue": null,
+      "value": "005K0000005VLEfIAO"
+    },
+    "LastModifiedDate": {
+      "displayValue": "09/02/2019 7:45 PM",
+      "value": "2019-02-10T00:45:03.000Z"
+    },
+    "Name": {
+      "displayValue": null,
+      "value": "T-00003"
+    },
+    "Owner": {
+      "displayValue": "User User",
+      "value": {
+        "apiName": "Name",
+        "childRelationships": {},
+        "fields": {
+          "Id": {
+            "displayValue": null,
+            "value": "005K0000005VLEfIAO"
+          },
+          "Name": {
+            "displayValue": null,
+            "value": "User User"
+          }
+        },
+        "id": "005K0000005VLEfIAO",
+        "lastModifiedById": null,
+        "lastModifiedDate": null,
+        "recordTypeInfo": null,
+        "systemModstamp": null
+      }
+    },
+    "OwnerId": {
+      "displayValue": null,
+      "value": "005K0000005VLEfIAO"
+    },
+    "Todo__c": {
+      "displayValue": null,
+      "value": "changed it"
+    }
+  },
+  "id": "a00K000000606PhIAI",
+  "lastModifiedById": "005K0000005VLEfIAO",
+  "lastModifiedDate": "2019-02-10T00:45:03.000Z",
+  "recordTypeInfo": null,
+  "systemModstamp": "2019-02-10T00:45:03.000Z"
+}

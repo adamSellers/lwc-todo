@@ -1,0 +1,10 @@
+<template>
+  <lightning-layout horizontal-align="spread" vertical-align="end">
+    <lightning-layout-item flexibility="grow" size="9">
+      <lightning-input label="Todo" value={newTodo} onchange={handleTodoChange}></lightning-input>
+    </lightning-layout-item>
+    <lightning-layout-item flexibility="grow" size="3" class="slds-text-align_center">
+      <lightning-button title="Create new Todo" label="New" icon-name="action:new_note" variant="neutral" onclick={createTodo}></lightning-button>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

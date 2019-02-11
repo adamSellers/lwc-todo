@@ -1,0 +1,31 @@
+<template>
+  <lightning-card title="Todos Component" icon-name="standard:record" class="slds-has-bottom-magnet">
+    <lightning-layout horizontal-align="space" multiple-rows="true">
+      <lightning-layout-item padding="around-small" flexibility="grow" size="12">
+        <c-create-todo></c-create-todo>
+      </lightning-layout-item>
+      <lightning-layout-item padding="around-small" flexibility="grow" size="12">
+        <div class="slds-text-heading_medium">Incomplete Todos</div>
+      </lightning-layout-item>
+      <lightning-layout-item padding="around-small" flexibility="grow" size="12">
+        <template if:true={incomplete}>
+          <template for:each={incomplete} for:item="singleincomplete">
+            <c-single-todo key={singleincomplete.Id} single-todo={singleincomplete} oncomplete={handleCompleteEvent}
+              ondelete={handleDeleteEvent} onsave={handleSaveEvent}></c-single-todo>
+          </template>
+        </template>
+      </lightning-layout-item>
+      <lightning-layout-item padding="around-small" flexibility="grow" size="12">
+        <div class="slds-text-heading_medium">Complete Todos</div>
+      </lightning-layout-item>
+      <lightning-layout-item padding="around-small" flexibility="grow" size="12">
+        <template if:true={complete}>
+          <template for:each={complete} for:item="singlecomplete">
+            <c-single-todo key={singlecomplete.Id} single-todo={singlecomplete} oncomplete={handleCompleteEvent}
+              ondelete={handleDeleteEvent} onsave={handleSaveEvent}></c-single-todo>
+          </template>
+        </template>
+      </lightning-layout-item>
+    </lightning-layout>
+  </lightning-card>
+</template>

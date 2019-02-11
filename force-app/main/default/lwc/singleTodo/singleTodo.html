@@ -1,0 +1,19 @@
+<template>
+  <lightning-layout horizontal-align="spread" vertical-align="end">
+    <lightning-layout-item size="9" flexibility="auto">
+      <div class="slds-form-element__control">
+        <input class="slds-input" type="text" value={singleTodo.Todo__c} onchange={changeTodoValue} />
+      </div>
+      <!--<lightning-input value={singleTodo.Todo__c} onchange={changeTodoValue}></lightning-input>-->
+    </lightning-layout-item>
+    <lightning-layout-item size="1" flexibility="auto" class="slds-m-left_x-small">
+      <lightning-button-icon-stateful icon-name="utility:answer" selected={singleTodo.Completed__c} onclick={completedHandler}></lightning-button-icon-stateful>
+    </lightning-layout-item>
+    <lightning-layout-item size="1" flexibility="auto">
+      <lightning-button-icon icon-name="utility:delete" alternative-text="Delete" onclick={deletedHandler}></lightning-button-icon>
+    </lightning-layout-item>
+    <lightning-layout-item size="1" flexibility="auto">
+      <lightning-button-icon icon-name="utility:save" alternative-text="Update Todo" onclick={saveHandler}></lightning-button-icon>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>
