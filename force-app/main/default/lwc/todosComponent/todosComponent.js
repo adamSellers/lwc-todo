@@ -27,7 +27,9 @@ export default class TodosComponent extends LightningElement {
   completeFieldName = COMPLETED_FIELD.fieldApiName;
   objectName = API_NAME.objectApiName;
 
-  @wire(getTodos)
+  @wire(getTodos, {
+    searchKey: '$searchString'
+  })
   sendForSplitting({
     error,
     data
@@ -78,6 +80,7 @@ export default class TodosComponent extends LightningElement {
         });
         this.dispatchEvent(toast);
       });
+
   }
 
   handleSaveEvent(evt) {
@@ -101,8 +104,7 @@ export default class TodosComponent extends LightningElement {
   // function to take the array of all todos and split into complete and incomplete
   splitTodos(todos) {
     console.log('split \'em!');
-    // reset the complete and incomplete arrays in a desparate attemp to get this
-    // fucking component to rerender on data change... 
+    // reset the complete and incomplete arrays
     this.incomplete = [];
     this.complete = [];
     this.allTodos = todos;
@@ -128,14 +130,15 @@ export default class TodosComponent extends LightningElement {
         this.dispatchEvent(toast);
 
         // now, update the tracked array to rerender the component
-        // this.allTodos.forEach((el) => {
-        //   if (el.Id === record.id) {
-        //     // set the new values in the all todos array
-        //     el.Todo__c = record.fields.Todo__c.value;
-        //     el.Completed__c = record.fields.Completed__c.value;
-        //   }
-        // });
-        // console.log('this will not be seen by anyone, ever..');
+        this.allTodos.forEach((el) => {
+          if (el.Id === record.id) {
+            // set the new values in the all todos array
+            el.Todo__c = record.fields.Todo__c.value;
+            el.Completed__c = record.fields.Completed__c.value;
+          }
+        });
+        console.log('this will not be seen by anyone, ever..');
+        this.splitTodos(this.allTodos);
       });
   }
 }
