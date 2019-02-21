@@ -2,7 +2,7 @@
   <lightning-card title="Todos Component" icon-name="standard:record" class="slds-has-bottom-magnet">
     <lightning-layout horizontal-align="space" multiple-rows="true">
       <lightning-layout-item padding="around-small" flexibility="grow" size="12">
-        <c-create-todo></c-create-todo>
+        <c-create-todo oncreate={handleCreate}></c-create-todo>
       </lightning-layout-item>
       <lightning-layout-item padding="around-small" flexibility="grow" size="12">
         <div class="slds-text-heading_medium">Incomplete Todos</div>

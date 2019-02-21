@@ -16,6 +16,12 @@ export default class CreateTodo extends LightningElement {
   @track newTodo = 'Please enter a todo';
   completedFlag = false;
 
+  handleFocus() {
+    if (this.newTodo === 'Please enter a todo') {
+      this.newTodo = '';
+    }
+  }
+
   createTodo() {
     const fields = {};
     fields[TODO_FIELD.fieldApiName] = this.newTodo;
@@ -33,6 +39,17 @@ export default class CreateTodo extends LightningElement {
             variant: 'success'
           }),
         );
+        // now publish the created event to the container
+        // first, create the data to send in the event
+        let newTodo = {
+          Id: todo.id,
+          Name: todo.fields.Name.value,
+          Todo__c: todo.fields.Todo__c.value,
+          Completed__c: todo.fields.Completed__c.value
+        };
+        this.dispatchEvent(new CustomEvent('create', {
+          detail: newTodo
+        }));
       })
       .catch(error => {
         this.dispatchEvent(

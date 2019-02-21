@@ -13,6 +13,9 @@ import {
   deleteRecord
 } from 'lightning/uiRecordApi';
 import {
+  refreshApex
+} from '@salesforce/apex';
+import {
   ShowToastEvent
 } from 'lightning/platformShowToastEvent';
 
@@ -22,6 +25,9 @@ export default class TodosComponent extends LightningElement {
   @track incomplete = [];
   allTodos = [];
 
+  // property for the wired todos result so it can be refreshed
+  sendForSplittingResult;
+
   // setup the fields and objects as required
   todoFieldName = TODO_FIELD.fieldApiName;
   completeFieldName = COMPLETED_FIELD.fieldApiName;
@@ -30,35 +36,38 @@ export default class TodosComponent extends LightningElement {
   @wire(getTodos, {
     searchKey: '$searchString'
   })
-  sendForSplitting({
-    error,
-    data
-  }) {
-    if (error) {
-      this.error = error;
-    } else if (data) {
-      this.splitTodos(data);
+  sendForSplitting(result) {
+    this.sendForSplittingResult = result;
+    if (result.error) {
+      this.error = result.error;
+    } else if (result.data) {
+      this.splitTodos(result.data);
     }
+  }
+
+  handleCreate() {
+    return refreshApex(this.sendForSplittingResult);
   }
 
   handleCompleteEvent(evt) {
     // firstly, filter the record from the all todos array
-    let recordId = evt.detail;
-    let updatedCompleteFlag = this.allTodos.filter(el => {
-      return el.Id === recordId;
-    })
+    let recordId = evt.detail.todoId;
+    let updatedCompleteFlag = false;
 
-    // flip the completed flag
-    let completeFlag = !updatedCompleteFlag[0].Completed__c;
+    // if the context is complete, set the flag to true. Then update
+    // the relevant view state
+    if (evt.detail.context === 'complete') {
+      updatedCompleteFlag = true;
+    }
     // setup the record object 
     let newRecord = {
       apiName: this.objectName,
       fields: {
         [this.completeFieldName]: {
-          value: completeFlag
+          value: updatedCompleteFlag
         }
       },
-      id: updatedCompleteFlag[0].Id
+      id: recordId
     }
     // generate the update record as per 
     // https://developer.salesforce.com/docs/component-library/documentation/lwc/lwc.reference_update_record
@@ -79,8 +88,8 @@ export default class TodosComponent extends LightningElement {
           variant: 'success'
         });
         this.dispatchEvent(toast);
+        return refreshApex(this.sendForSplittingResult);
       });
-
   }
 
   handleSaveEvent(evt) {
@@ -103,12 +112,9 @@ export default class TodosComponent extends LightningElement {
 
   // function to take the array of all todos and split into complete and incomplete
   splitTodos(todos) {
-    console.log('split \'em!');
-    // reset the complete and incomplete arrays
     this.incomplete = [];
     this.complete = [];
-    this.allTodos = todos;
-    this.allTodos.forEach(todo => {
+    todos.forEach(todo => {
       if (todo.Completed__c) {
         // add to complete
         this.complete.push(todo);
@@ -128,17 +134,7 @@ export default class TodosComponent extends LightningElement {
           variant: 'success'
         });
         this.dispatchEvent(toast);
-
-        // now, update the tracked array to rerender the component
-        this.allTodos.forEach((el) => {
-          if (el.Id === record.id) {
-            // set the new values in the all todos array
-            el.Todo__c = record.fields.Todo__c.value;
-            el.Completed__c = record.fields.Completed__c.value;
-          }
-        });
-        console.log('this will not be seen by anyone, ever..');
-        this.splitTodos(this.allTodos);
+        return refreshApex(this.sendForSplittingResult);
       });
   }
 }
