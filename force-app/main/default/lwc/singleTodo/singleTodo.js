@@ -18,7 +18,6 @@ export default class SingleTodo extends LightningElement {
   completedHandler() {
     let detailObject = {};
     // check to see if it is being completed or incompleted
-    console.log('the single todo on the completed click was: ' + JSON.stringify(this.singleTodo));
     if (this.singleTodo.Completed__c) {
       detailObject = {
         context: 'incomplete',
