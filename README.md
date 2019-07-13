@@ -40,4 +40,4 @@ Contains some stuff, custom objects and permission sets etc. Ignore the profiles
 
 ## Issues
 
-The App needs to be created and included, there is a bug with the version of DX that this was built in that means you couldn't source:pull the App stuff... (google it if interested, should be fixed soon - if not already!)
+None known at the moment, although they're no doubt in there somewhere! (feel free to submit PR's)
