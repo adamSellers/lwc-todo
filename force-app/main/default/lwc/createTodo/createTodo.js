@@ -40,16 +40,7 @@ export default class CreateTodo extends LightningElement {
           }),
         );
         // now publish the created event to the container
-        // first, create the data to send in the event
-        let newTodo = {
-          Id: todo.id,
-          Name: todo.fields.Name.value,
-          Todo__c: todo.fields.Todo__c.value,
-          Completed__c: todo.fields.Completed__c.value
-        };
-        this.dispatchEvent(new CustomEvent('create', {
-          detail: newTodo
-        }));
+        this.dispatchEvent(new CustomEvent('create'));
       })
       .catch(error => {
         this.dispatchEvent(
